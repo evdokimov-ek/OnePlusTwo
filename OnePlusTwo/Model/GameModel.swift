@@ -15,6 +15,7 @@ struct GameModel {
     var sign = [1: "+", 2: "-"]
     var lag = [1, -1, 10, -10, 2, -2]
     var currentSign: Int
+    var rightAnswer: Int
     let defaults = UserDefaults.standard
     
     mutating func prepareQuestion() {
@@ -27,6 +28,7 @@ struct GameModel {
             question[1] = Int.random(in: 1...question[0]-1)
             answers[0] = question[0] - question[1]
         }
+        rightAnswer = answers[0]
         lag.shuffle()
         for i in (1...3){
             answers[i] = answers[0] + lag[i]
@@ -57,11 +59,15 @@ struct GameModel {
     func saveHighScore() {
         
         let hs = defaults.integer(forKey: "highScore")
+        var rightAnswers = defaults.integer(forKey: "rightAnswers")
+        var wrongAnswers = defaults.integer(forKey: "wrongAnswers")
         if score > hs {
             defaults.set(score, forKey: "highScore")
-            defaults.synchronize()
-            print(defaults.integer(forKey: "highScore"))
         }
-        
+        wrongAnswers += 1
+        rightAnswers += Int(score/10)
+        defaults.set(wrongAnswers, forKey: "wrongAnswers")
+        defaults.set(rightAnswers, forKey: "rightAnswers")
+        defaults.synchronize()
     }
 }

@@ -9,7 +9,10 @@ import UIKit
 
 class ActionViewController: UIViewController {
     
-    var gameModel = GameModel(question: [1, 2], answers: [1, 2, 3, 4], currentSign: 1)
+    var gameModel = GameModel(question: [1, 2], answers: [1, 2, 3, 4], currentSign: 1, rightAnswer: 3)
+    var timer = Timer()
+    var secondsPassed = 0
+    var totalTime = 31
 
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var timerLabel: UILabel!
@@ -30,18 +33,24 @@ class ActionViewController: UIViewController {
         
         let userAnswer = Int(sender.currentTitle ?? "0")!
         let userGotIrRight = gameModel.checkAnswer(answer: userAnswer)
-        print(userGotIrRight)
+        
         if userGotIrRight {
             sender.backgroundColor = UIColor.green
+            Timer.scheduledTimer(timeInterval: 0.5, target:self, selector: #selector(updateUI), userInfo: nil, repeats: false)
         } else{
+            timer.invalidate()
+            secondsPassed = 0
             sender.backgroundColor = UIColor.red
-            
-            gameModel.saveHighScore()
-            Timer.scheduledTimer(timeInterval: 1, target:self, selector: #selector(updateUI), userInfo: nil, repeats: false)
-            self.dismiss(animated: true, completion: nil)
-            
+            self.gameModel.saveHighScore()
+            let alert = UIAlertController(title: "К сожалению ты ошибся!", message: "Правильный ответ \(gameModel.rightAnswer)", preferredStyle: .alert)
+            let action = UIAlertAction(title: "Ok", style: .default) { action in
+
+                self.dismiss(animated: true, completion: nil)
+            }
+            alert.addAction(action)
+            present(alert, animated: true, completion: nil)
         }
-        Timer.scheduledTimer(timeInterval: 0.5, target:self, selector: #selector(updateUI), userInfo: nil, repeats: false)
+
     }
     
     @objc func updateUI(){
@@ -60,6 +69,27 @@ class ActionViewController: UIViewController {
         secondButton.backgroundColor = UIColor.systemBrown
         thirdButton.backgroundColor = UIColor.systemBrown
         fourthButton.backgroundColor = UIColor.systemBrown
+        timer.invalidate()
+        secondsPassed = 0
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+    }
+    
+    @objc func updateTimer(){
+        if secondsPassed < totalTime {
+            secondsPassed += 1
+            timerLabel.text = String(totalTime - secondsPassed)
+            
+        } else {
+            timer.invalidate()
+            secondsPassed = 0
+            let alert = UIAlertController(title: "Время вышло!", message: "Правильный ответ \(gameModel.rightAnswer)", preferredStyle: .alert)
+            let action = UIAlertAction(title: "Ok", style: .default) { action in
+                self.gameModel.saveHighScore()
+                self.dismiss(animated: true, completion: nil)
+            }
+            alert.addAction(action)
+            present(alert, animated: true, completion: nil)
+        }
     }
 }
 

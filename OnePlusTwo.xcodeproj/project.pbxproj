@@ -15,6 +15,7 @@
 		016AA4C2270E9F78003E997D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 016AA4C0270E9F78003E997D /* LaunchScreen.storyboard */; };
 		016AA4CD270FF2EA003E997D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016AA4CC270FF2EA003E997D /* MainViewController.swift */; };
 		016AA4CF271060BD003E997D /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016AA4CE271060BC003E997D /* GameModel.swift */; };
+		016AA4D12712EDD0003E997D /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016AA4D02712EDCF003E997D /* StatisticsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		016AA4C3270E9F78003E997D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		016AA4CC270FF2EA003E997D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		016AA4CE271060BC003E997D /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
+		016AA4D02712EDCF003E997D /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 			children = (
 				016AA4B9270E9F75003E997D /* ActionViewController.swift */,
 				016AA4CC270FF2EA003E997D /* MainViewController.swift */,
+				016AA4D02712EDCF003E997D /* StatisticsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -171,6 +174,7 @@
 				016AA4CF271060BD003E997D /* GameModel.swift in Sources */,
 				016AA4BA270E9F75003E997D /* ActionViewController.swift in Sources */,
 				016AA4B6270E9F75003E997D /* AppDelegate.swift in Sources */,
+				016AA4D12712EDD0003E997D /* StatisticsViewController.swift in Sources */,
 				016AA4B8270E9F75003E997D /* SceneDelegate.swift in Sources */,
 				016AA4CD270FF2EA003E997D /* MainViewController.swift in Sources */,
 			);
